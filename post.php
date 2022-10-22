@@ -7,44 +7,9 @@ require_once("time.php");
 <?php
 if(isset($_POST['Submit']))
 {
-    $author="Kuldeep";
-    $currentTime=time();
-    $time=strftime("%Y-%m-%d %H:%M:%S",$currentTime);
-
-    if(empty($_POST['catTitle']))
-    {
-      $_SESSION['errorMessage']="All field must be fill";
-       
-      redirectFunction("category.php");
-    }elseif(strlen($_POST['catTitle'])<3)
-    {
-        $_SESSION['errorMessage']="Title must be larger than 3 char ";
-        redirectFunction("category.php");
-    }elseif(strlen($_POST['catTitle'])>49)
-    {
-        $_SESSION['errorMessage']="Title length must be smaller than 49 char";
-        redirectFunction("category.php");
-    }
-    else{
-        $sql="INSERT INTO category(title,author,datetime)";
-        $sql.="VALUES(:titlE,:authoR,:datetime)";
-        $stmt=$connectionDB->prepare($sql);
-        $stmt->bindValue(':titlE',$_POST['catTitle']);
-        $stmt->bindValue(':authoR',$author);
-        $stmt->bindValue(':datetime',$time);
-        $Execute=$stmt->execute();
-        if($Execute)
-        {
-
-        }
-        
-
-    }
 }
-
-
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,7 +42,7 @@ if(isset($_POST['Submit']))
         </div>
  
      <div class="header">
-        <h1><i class="fa-solid fa-pen-to-square"></i><i class="fa-solid fa-arrows-to-eye"></i>Category</h1>
+        <h1><i class="fa-sharp fa-solid fa-plus"></i><i class="fa-solid fa-arrows-to-eye"></i>Post</h1>
      </div>
      <?php
      echo errorMessage();
@@ -85,10 +50,37 @@ if(isset($_POST['Submit']))
      ?>
      <form action="category.php" method="post">
      <div class="manage">
-        <h1>Add New Category</h1>
+        <h1>Add New Post</h1>
         <div class="addCat">
-            <p>Category Title:</p>
+            <p>Post Title:</p>
             <input type="text" placeholder="Type your title" name="catTitle"/>
+        </div>
+        <div class="addCat">
+            <p>Select Category:</p>
+            <select class="drop">
+               <?php
+               global $connectionDB;
+               $sql="SELECT * FROM category";
+               $stmt=$connectionDB->query($sql);
+               while($DataRows=$stmt->fetch())
+               {
+                $id=$DataRows['id'];
+                $title=$DataRows['title'];
+               
+               
+               ?>
+               <option><?php echo $title?></option>
+               <?php } ?>
+
+            </select>
+        </div>
+        <div class="addCat">
+            <p>Select Image:</p>
+            <input type="file" placeholder="Select from device" name="image"/>
+        </div>
+        <div class="addCat">
+            <p>Post Title:</p>
+            <textarea rows="5" cols="80"></textarea>
         </div>
         <div class="manageBtn">
             <button type="submit"><i class="fa-solid fa-hand-back-point-left"></i>Go to dashboard</button>

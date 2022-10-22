@@ -91,4 +91,26 @@ top:-10px;
 }
 .manageBtn button:nth-of-type(2){
     background-color: #7FB77E;
+
+}
+.session{
+    background-color: #7FB77E;
+    width:60%;
+    margin: 0 auto;
+    height: 35px;
+}
+.addCat select{
+    width: 100%;
+    height: 25px;
+    margin-top: 5px;
+
+}
+.addPost{
+    width: 80%;
+    margin: 5px auto;
+}
+.addPost input{
+    width: 100%;
+    height: 25px;
+    margin-top: 5px;
 }
