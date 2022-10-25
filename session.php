@@ -15,7 +15,7 @@ function successMessage()
 {
     if(isset($_SESSION['successMessage']))
     {
-        $output="<div>";
+        $output="<div class=\"sessionGreen\">";
         $output.=htmlentities($_SESSION['successMessage']);
         $output.="</div>";
         $_SESSION['successMessage']=null;

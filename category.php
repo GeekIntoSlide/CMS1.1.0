@@ -35,7 +35,7 @@ if(isset($_POST['Submit']))
         $Execute=$stmt->execute();
         if($Execute)
         {
-
+            $_SESSION['successMessage']="Post upload successfully";
         }
         
 
@@ -92,7 +92,7 @@ if(isset($_POST['Submit']))
         </div>
         <div class="manageBtn">
             <button type="submit"><i class="fa-solid fa-hand-back-point-left"></i>Go to dashboard</button>
-            <button type="submit" name='Submit'><i class="fa-solid fa-check"></i>Publish</button>
+            <button type="submit" name='Submit'><i class="fa-solid fa-check"></i>ADD</button>
         </div>
      </div>
      </form>

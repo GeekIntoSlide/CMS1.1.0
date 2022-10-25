@@ -5,8 +5,38 @@ require_once("session.php");
 require_once("time.php");
 ?>
 <?php
-if(isset($_POST['Submit']))
+if(isset($_POST['submitPost']))
 {
+    $Image=$_FILES["Image"]["name"];
+    $target="upload/".basename($_FILES["Image"]["name"]);
+    $currentTime=time();
+    $time=strftime("%Y-%m-%d %H:%M:%S",$currentTime);
+  if(empty($_POST['postTitle'])||empty($_POST['catDrop'])||empty($_POST['textArea']))
+  {
+    $_SESSION['errorMessage']="All filed must be fill";
+    redirectFunction("post.php");
+  }elseif (strlen($_POST['textArea'])>1000) {
+    # code...
+    $_SESSION['errorMessage']="Please upload post less than 1000 words ";
+    redirectFunction("post.php");
+  }
+  else {
+    # code...
+    global $connectionDB;
+    $sql="INSERT INTO post(datetime,title,category,image,post)";
+    $sql.="VALUES(:datetime,:titlE,:categorY,:imagE,:posT)";
+    $stmt=$connectionDB->prepare($sql);
+    $stmt->bindValue(':titlE',$_POST['postTitle']);
+    $stmt->bindValue(':datetime',$time);
+    $stmt->bindValue(':categorY',$_POST['catDrop']);
+    $stmt->bindValue(':imagE',$Image);
+    $stmt->bindValue(':posT',$_POST['textArea']);
+    // $stmt->bindValue(':authoR',$_POST['author']);
+    move_uploaded_file($_FILES["Image"]["tmp_name"],$target);
+    $Execute=$stmt->execute();
+
+    $_SESSION['successMessage']="Post upload successfully";
+}
 }
 ?>
 
@@ -48,16 +78,16 @@ if(isset($_POST['Submit']))
      echo errorMessage();
      echo successMessage();
      ?>
-     <form action="category.php" method="post">
+     <form action="post.php" method="post" enctype="multipart/form-data">
      <div class="manage">
         <h1>Add New Post</h1>
         <div class="addCat">
             <p>Post Title:</p>
-            <input type="text" placeholder="Type your title" name="catTitle"/>
+            <input type="text" placeholder="Type your title" name="postTitle"/>
         </div>
         <div class="addCat">
             <p>Select Category:</p>
-            <select class="drop">
+            <select class="drop" name="catDrop">
                <?php
                global $connectionDB;
                $sql="SELECT * FROM category";
@@ -76,15 +106,15 @@ if(isset($_POST['Submit']))
         </div>
         <div class="addCat">
             <p>Select Image:</p>
-            <input type="file" placeholder="Select from device" name="image"/>
+            <input type="file" placeholder="Select from device" name="Image"/>
         </div>
         <div class="addCat">
-            <p>Post Title:</p>
-            <textarea rows="5" cols="80"></textarea>
+            <p>Post Content:</p>
+            <textarea rows="5" cols="80" name="textArea"></textarea>
         </div>
         <div class="manageBtn">
             <button type="submit"><i class="fa-solid fa-hand-back-point-left"></i>Go to dashboard</button>
-            <button type="submit" name='Submit'><i class="fa-solid fa-check"></i>Publish</button>
+            <button type="submit" name='submitPost'><i class="fa-solid fa-check"></i>Publish</button>
         </div>
      </div>
      </form>

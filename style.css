@@ -94,6 +94,12 @@ top:-10px;
 
 }
 .session{
+    background-color: red;
+    width:60%;
+    margin: 0 auto;
+    height: 35px;
+}
+.sessionGreen{
     background-color: #7FB77E;
     width:60%;
     margin: 0 auto;
@@ -113,4 +119,58 @@ top:-10px;
     width: 100%;
     height: 25px;
     margin-top: 5px;
+}
+.panel{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    align-items: center;
+}
+.panel button{
+    width: 100%;
+    margin-top: 30px;
+    height: 25px;
+}
+.postShow{
+    width: 80%;
+    margin: 20px auto;
+}
+.cmt{
+
+}
+.lpre{
+    background-color: palegreen;
+    font-weight: 400;
+}
+.edit button:nth-of-type(1)
+{
+    background-color: yellow;
+
+}
+.edit button:nth-of-type(2){
+    background-color: red;
+}
+.blogShow{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    align-items: center;
+    margin:20px auto ;
+    width: 80%;
+}
+.content{
+    background-color:aliceblue;
+}
+.side-content{
+    background-color: aqua;
+}
+.topHeading{
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+
+    align-items: center;
+    
+  
+
+}
+.blogImage{
+    width: 100%;
 }
