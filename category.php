@@ -3,6 +3,7 @@ require_once("db.php");
 require_once("function.php");
 require_once("session.php");
 require_once("time.php");
+// password_protected();
 ?>
 <?php
 if(isset($_POST['Submit']))
@@ -72,7 +73,7 @@ if(isset($_POST['Submit']))
             </ul>
         </div>
         <div class="status">
-            <p><i class="fa-solid fa-right-from-bracket"></i>Logout</p>
+            <p><i class="fa-solid fa-right-from-bracket"></i><a href="logout.php">Logout</a></p>
         </div>
         </div>
  

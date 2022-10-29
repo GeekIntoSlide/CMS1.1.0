@@ -3,6 +3,7 @@ require_once("db.php");
 require_once("function.php");
 require_once("session.php");
 require_once("time.php");
+password_protected();
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +33,7 @@ require_once("time.php");
             </ul>
         </div>
         <div class="status">
-            <p><i class="fa-solid fa-right-from-bracket"></i>Logout</p>
+            <p><i class="fa-solid fa-right-from-bracket"></i><a href="logout.php">Logout</a></p>
         </div>
         </div>
  
@@ -60,6 +61,7 @@ require_once("time.php");
      <div class="postShow">
      <table width="1000" align="center" border="5">
      <tr>
+        <th>ID</th>
         <th>#Title</th>
         <th>Category</th>
         <th>Date&Time</th>
@@ -74,6 +76,7 @@ require_once("time.php");
      $stmt=$connectionDB->query($sql);
      while($DataRows=$stmt->fetch())
      {
+        $id=$DataRows['id'];
         $title=$DataRows['title'];
         $cat=$DataRows['category'];
         $date=$DataRows['datetime'];
@@ -85,12 +88,13 @@ require_once("time.php");
             $title=substr($title,0,15)."....";
         } 
         ?>
+    
             <?php echo $title?></th>
         <th><?php  echo $cat?></th>
         <th><?php echo $date?></th>
         <th><img src="upload/<?php echo $img?>" width="170px" height="50px"/></th>
         <th class="cmt">Comments</th>
-        <th class="edit"><button>Edit</button> <button>Delete</button></th>
+        <th class="edit"><button><a href="editPost.php?id=<?php echo $id?>">Edit</a></button> <button><a href="deletePost.php?id=<?php echo $id?>">Delete</a></button></th>
         <th class="lpre">Live preview</th>
      </tr>
      <?php }?>

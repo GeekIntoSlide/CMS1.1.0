@@ -20,7 +20,7 @@ function successMessage()
         $output.="</div>";
         $_SESSION['successMessage']=null;
         return $output;
-    }
+    } 
 }
 
 ?>
