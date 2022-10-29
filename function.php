@@ -52,4 +52,40 @@ function password_protected()
       redirectFunction("login.php");
    }
 }
+function totalPost()
+{
+   global $connectionDB;
+   $sql="SELECT COUNT(*) FROM post";
+   $stmt=$connectionDB->query($sql);
+   $totalRow=$stmt->fetch();
+   $totalPost=array_shift($totalRow);
+   echo $totalPost;
+
+}
+function totalCategory()
+{
+   global $connectionDB;
+   $sql="SELECT COUNT(*) FROM category";
+   $stmt=$connectionDB->query($sql);
+   $totalRow=$stmt->fetch();
+   $totalCategory=array_shift($totalRow);
+   echo $totalCategory;
+}
+function totalComment(){
+   global $connectionDB;
+   $sql="SELECT COUNT(*) FROM comment";
+   $stmt=$connectionDB->query($sql);
+   $totalRow=$stmt->fetch();
+   $totalComment=array_shift($totalRow);
+   echo $totalComment;
+}
+function totalAdmin()
+{
+   global $connectionDB;
+   $sql="SELECT COUNT(*) FROM post";
+   $stmt=$connectionDB->query($sql);
+   $totalRow=$stmt->fetch();
+   $totalAdmin=array_shift($totalRow);
+   echo $totalAdmin;
+}
 ?>

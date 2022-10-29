@@ -97,5 +97,37 @@ if(isset($_POST['Submit']))
         </div>
      </div>
      </form>
+     <div class="postShow">
+     <table width="1000" align="center" border="5">
+     <tr>
+        <th>S.NO</th>
+        <th>Date</th>
+        <th>category</th>
+        <th>Delete</th>
+     </tr>
+     <?php
+    global $connectionDB;
+    $sql="SELECT * FROM category";
+    $Execute=$connectionDB->query($sql);
+    $srno=0;
+    while($DataRows=$Execute->fetch())
+    {
+        $id=$DataRows['id'];
+      $date=$DataRows['datetime'];
+      $category=$DataRows['title'];
+      $srno++;?>
+      
+      <tr>
+        <th><?php echo $srno?></th>
+        <th><?php echo $date?></th>
+        <th><?php echo $category?></th>
+        <th><a href="deleteCat.php?id=<?php echo $id?>">Delete</a></th>
+      </tr>
+    
+    <?php }?>
+     
+     
+     </table>
+     </div>
 </body>
 </html>

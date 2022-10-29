@@ -102,5 +102,37 @@ $confirmPassword=$_POST['confirmPassword'];
         </div>
      </div>
      </form>
+     <div class="postShow">
+     <table width="1000" align="center" border="5">
+     <tr>
+        <th>S.NO</th>
+        <th>Name</th>
+        <th>ID</th>
+        <th>Delete</th>
+     </tr>
+     <?php
+    global $connectionDB;
+    $sql="SELECT * FROM manageAdmin";
+    $Execute=$connectionDB->query($sql);
+    $srno=0;
+    while($DataRows=$Execute->fetch())
+    {
+        $id=$DataRows['id'];
+      $name=$DataRows['name'];
+      $userid=$DataRows['username'];
+      $srno++;?>
+      
+      <tr>
+        <th><?php echo $srno?></th>
+        <th><?php echo $name?></th>
+        <th><?php echo $userid?></th>
+        <th><a href="deleteAdmin.php?id=<?php echo $id?>">Delete</a></th>
+      </tr>
+    
+    <?php }?>
+     
+     
+     </table>
+     </div>
 </body>
 </html>
